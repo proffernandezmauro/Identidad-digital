@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Digital & Creador de Perfil: Identidad y Redes Sociales</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            accent: '#8b5cf6',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.4);
+            border-radius: 9999px;
+        }
+        .story-ring {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .printable-section, .printable-section * {
+                visibility: visible;
+            }
+            .printable-section {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 min-h-screen transition-colors duration-200 font-sans">
+
+    <header class="sticky top-0 z-30 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-gradient-to-tr from-purple-600 to-pink-500 rounded-xl text-white shadow-md">
+                    <i class="ph-bold ph-aperture text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Walter Benjamin & Byung-Chul Han</p>
+                </div>
+            </div>
+
+            <!-- Tab Navigation & Actions -->
+            <div class="flex items-center space-x-2">
+                <button id="theme-toggle" class="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition" title="Cambiar Tema">
+                    <i id="theme-icon" class="ph-bold ph-moon text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabs Container (3 Pestañas) -->
+        <div class="max-w-4xl mx-auto px-4 flex border-t border-gray-100 dark:border-gray-800/60 text-sm font-medium">
+            <button id="tab-btn-intro" onclick="switchTab('intro')" class="flex-1 py-3 text-center border-b-2 border-brand-600 text-brand-600 dark:text-brand-400 font-bold flex items-center justify-center gap-2 transition">
+                <i class="ph-bold ph-compass text-lg"></i>
+                <span>1. Introducción</span>
+            </button>
+            <button id="tab-btn-reflection" onclick="switchTab('reflection')" class="flex-1 py-3 text-center border-b-2 border-transparent text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex items-center justify-center gap-2 transition">
+                <i class="ph-bold ph-notebook text-lg"></i>
+                <span>2. Ficha de Reflexión</span>
+                <span id="badge-progress-tab" class="bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 text-xs px-2 py-0.5 rounded-full ml-1">0/18</span>
+            </button>
+            <button id="tab-btn-custom-profile" onclick="switchTab('custom-profile')" class="flex-1 py-3 text-center border-b-2 border-transparent text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex items-center justify-center gap-2 transition">
+                <i class="ph-bold ph-user-circle-plus text-lg"></i>
+                <span>3. Mi Perfil Creado</span>
+                <span class="bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full">Personal</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-6">
+
+        <!-- PESTAÑA 1: INTRODUCCIÓN Y GUÍA PEDAGÓGICA -->
+        <section id="tab-content-intro" class="space-y-6">
+            
+            <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 sm:p-8 border border-gray-200 dark:border-gray-800 shadow-sm space-y-6">
+                
+                <div class="space-y-2 border-b border-gray-100 dark:border-gray-800 pb-5">
+                    <div class="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-500">
+                        <i class="ph-bold ph-sparkle"></i>
+                        <span>Guía de reflexión</span>
+                    </div>
+                    <h2 class="text-2xl font-serif font-bold text-gray-900 dark:text-white">La Construcción de la Identidad en la Era Digital</h2>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Bienvenido/a a esta guía de reflexión interactiva. El objetivo de esta propuesta es analizar de qué manera las plataformas y redes sociales funcionan como una carta de presentación personal, mediando nuestra relación con el mundo, con los otros y con nuestra propia imagen.
+                    </p>
+                </div>
+
+                <!-- Marco Teórico Resumido -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-100 dark:border-purple-900/40 space-y-2">
+                        <div class="flex items-center gap-2 font-bold text-purple-900 dark:text-purple-300 text-sm">
+                            <i class="ph-bold ph-aperture text-base"></i>
+                            <span>Walter Benjamin: Técnica y Mediación</span>
+                        </div>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+                            Benjamin analiza cómo los medios tecnológicos transforman la percepción. Al reproducir la imagen de las cosas y de las personas, se produce la pérdida del <strong>"aura"</strong> (la presencia única e irrepetible aquí y ahora). Además, plantea cómo la tecnología pasa de ser una mediación suave a constituir una <em>segunda naturaleza</em> que moldea nuestra experiencia colectiva.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-900/40 space-y-2">
+                        <div class="flex items-center gap-2 font-bold text-amber-900 dark:text-amber-300 text-sm">
+                            <i class="ph-bold ph-eye text-base"></i>
+                            <span>Byung-Chul Han: Transparencia y Rendimiento</span>
+                        </div>
+                        <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+                            Han estudia la <strong>"sociedad de la transparencia"</strong> y la <strong>"sociedad del rendimiento"</strong>, donde los sujetos se exhiben voluntariamente como mercancías digitales. La sobreexposición elimina el misterio, el secreto y la alteridad, convirtiendo la privacidad y lo cotidiano en un escaparate continuo de autoevaluación.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pasos para completar la actividad -->
+                <div class="space-y-3 pt-2">
+                    <h3 class="font-bold text-base text-gray-900 dark:text-white flex items-center gap-2">
+                        <i class="ph-bold ph-steps text-brand-600"></i> ¿Cómo realizar esta actividad?
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        <div class="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700/60 space-y-1">
+                            <span class="font-bold text-brand-600 text-sm block">Paso 1</span>
+                            <p class="font-semibold text-gray-800 dark:text-gray-200">Explora la Ficha de Reflexión</p>
+                            <p class="text-gray-500">Haz clic en la segunda pestaña. Interactúa con las 18 secciones del perfil modelo (foto, seguidores, bio, historias y fotos).</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700/60 space-y-1">
+                            <span class="font-bold text-brand-600 text-sm block">Paso 2</span>
+                            <p class="font-semibold text-gray-800 dark:text-gray-200">Responde las Consignas</p>
+                            <p class="text-gray-500">Lee cada pregunta breve y su nota teórica. Redacta tu reflexión personal y guarda los cambios (se guardan automáticamente en tu navegador).</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700/60 space-y-1">
+                            <span class="font-bold text-brand-600 text-sm block">Paso 3</span>
+                            <p class="font-semibold text-gray-800 dark:text-gray-200">Crea y Exporta</p>
+                            <p class="text-gray-500">Exporta tu ficha en PDF para compartirla. Opcionalmente, utiliza la tercera pestaña para diseñar tu propio perfil personal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end">
+                    <button onclick="switchTab('reflection')" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs rounded-xl shadow-sm transition flex items-center gap-2">
+                        <span>Ir a la Ficha de Reflexión</span>
+                        <i class="ph-bold ph-arrow-right text-sm"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PESTAÑA 2: FICHA DE REFLEXIÓN -->
+        <section id="tab-content-reflection" class="space-y-6 hidden">
+            
+            <!-- Banner Intro -->
+            <div class="bg-white dark:bg-gray-900 rounded-2xl p-5 border border-gray-200/80 dark:border-gray-800 shadow-sm relative overflow-hidden">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-500">
+                            <i class="ph-bold ph-sparkle"></i>
+                            <span>Guía de reflexión</span>
+                        </div>
+                        <h2 class="text-lg font-serif font-bold text-gray-900 dark:text-white">Análisis de la Identidad en Redes</h2>
+                        <p class="text-xs text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed">
+                            Responde las 18 consignas haciendo clic en cada elemento del perfil modelo estático. Al finalizar, presiona **"Ver Mi Ficha"** para exportar o imprimir tu trabajo escolar.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-right hidden sm:block">
+                            <span class="text-xs text-gray-500 block">Progreso total</span>
+                            <span id="progress-percentage" class="text-sm font-bold text-brand-600">0%</span>
+                        </div>
+                        <button onclick="openSummaryModal()" class="flex items-center space-x-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-semibold transition shadow-sm">
+                            <i class="ph-bold ph-file-text text-base"></i>
+                            <span>Ver Mi Ficha / Exportar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Canvas Modelo -->
+            <div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm p-4 sm:p-8">
+                
+                <!-- Profile Header -->
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 pb-6 border-b border-gray-100 dark:border-gray-800">
+                    
+                    <!-- Avatar Model (Consigna 1) -->
+                    <div class="relative group cursor-pointer" onclick="openConsigna('avatar')">
+                        <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full story-ring p-1 shadow-md group-hover:scale-105 transition duration-200">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" 
+                                 alt="Foto de Perfil" 
+                                 class="w-full h-full object-cover rounded-full border-2 border-white dark:border-gray-900">
+                        </div>
+                        <div id="badge-avatar" class="absolute bottom-0 right-0 bg-brand-600 text-white p-2 rounded-full shadow-lg border-2 border-white dark:border-gray-900 flex items-center justify-center">
+                            <i class="ph-bold ph-question text-xs"></i>
+                        </div>
+                    </div>
+
+                    <!-- Metrics & Bio -->
+                    <div class="flex-1 text-center sm:text-left space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                            <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white flex items-center justify-center sm:justify-start gap-1">
+                                @identidad_curada
+                                <i class="ph-fill ph-seal-check text-blue-500 text-lg" title="Verificado"></i>
+                            </h2>
+                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-xs font-semibold rounded-lg text-gray-600 dark:text-gray-300 w-fit mx-auto sm:mx-0">
+                                Perfil Modelo de Análisis
+                            </span>
+                        </div>
+
+                        <!-- Metrics (Consignas 2 & 3) -->
+                        <div class="flex justify-around sm:justify-start sm:space-x-8 py-2 border-y sm:border-y-0 border-gray-100 dark:border-gray-800">
+                            <div class="text-center sm:text-left">
+                                <span class="block text-base font-bold text-gray-900 dark:text-white">9</span>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">Publicaciones</span>
+                            </div>
+                            <div onclick="openConsigna('followers')" class="cursor-pointer group text-center sm:text-left px-2 py-1 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+                                <div class="flex items-center justify-center sm:justify-start space-x-1">
+                                    <span class="text-base font-bold text-gray-900 dark:text-white group-hover:text-brand-600 transition">14.8k</span>
+                                    <i id="badge-followers-icon" class="ph-bold ph-circle text-gray-400 text-xs"></i>
+                                </div>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">Seguidores <i class="ph-bold ph-cursor-click text-brand-500"></i></span>
+                            </div>
+                            <div onclick="openConsigna('following')" class="cursor-pointer group text-center sm:text-left px-2 py-1 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+                                <div class="flex items-center justify-center sm:justify-start space-x-1">
+                                    <span class="text-base font-bold text-gray-900 dark:text-white group-hover:text-brand-600 transition">342</span>
+                                    <i id="badge-following-icon" class="ph-bold ph-circle text-gray-400 text-xs"></i>
+                                </div>
+                                <span class="text-xs text-gray-500 dark:text-gray-400">Seguidos <i class="ph-bold ph-cursor-click text-brand-500"></i></span>
+                            </div>
+                        </div>
+
+                        <!-- Bio (Consigna 4) -->
+                        <div onclick="openConsigna('bio')" class="cursor-pointer p-3 rounded-xl border border-dashed border-gray-300 dark:border-gray-700 hover:border-brand-500 dark:hover:border-brand-500 transition group bg-gray-50/50 dark:bg-gray-800/30">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-sm text-gray-900 dark:text-white">Aura & Transparencia Digital ✦</h3>
+                                    <p class="text-xs text-gray-600 dark:text-gray-300 mt-1">
+                                        "Exhibiendo instantes. Habitando la transparencia total." 🌿✨<br>
+                                        📍 Buenos Aires | ✈️ World
+                                    </p>
+                                </div>
+                                <span id="badge-bio" class="text-xs px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded font-medium group-hover:bg-brand-600 group-hover:text-white transition">
+                                    Reflexionar Bio
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Highlights (Consignas 5 a 9) -->
+                <div class="pt-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Historias Destacadas (Consignas 5-9)</h4>
+                    </div>
+                    
+                    <div class="flex items-center gap-4 sm:gap-6 overflow-x-auto pb-2 custom-scrollbar">
+                        <div onclick="openConsigna('story1')" class="flex flex-col items-center gap-1.5 cursor-pointer flex-shrink-0 group">
+                            <div class="w-16 h-16 rounded-full p-0.5 border-2 border-gray-300 dark:border-gray-700 group-hover:border-brand-500 transition">
+                                <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=200" alt="Viajes" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-xs font-medium text-gray-700 dark:text-gray-300 flex items-center gap-1">
+                                Viajes <i id="badge-story1-icon" class="ph-bold ph-circle text-[10px] text-gray-400"></i>
+                            </span>
+                        </div>
+                        <div onclick="openConsigna('story2')" class="flex flex-col items-center gap-1.5 cursor-pointer flex-shrink-0 group">
+                            <div class="w-16 h-16 rounded-full p-0.5 border-2 border-gray-300 dark:border-gray-700 group-hover:border-brand-500 transition">
+                                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=200" alt="Amigos" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-xs font-medium text-gray-700 dark:text-gray-300 flex items-center gap-1">
+                                Amigos <i id="badge-story2-icon" class="ph-bold ph-circle text-[10px] text-gray-400"></i>
+                            </span>
+                        </div>
+                        <div onclick="openConsigna('story3')" class="flex flex-col items-center gap-1.5 cursor-pointer flex-shrink-0 group">
+                            <div class="w-16 h-16 rounded-full p-0.5 border-2 border-gray-300 dark:border-gray-700 group-hover:border-brand-500 transition">
+                                <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=200" alt="Reflexión" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-xs font-medium text-gray-700 dark:text-gray-300 flex items-center gap-1">
+                                Reflexión <i id="badge-story3-icon" class="ph-bold ph-circle text-[10px] text-gray-400"></i>
+                            </span>
+                        </div>
+                        <div onclick="openConsigna('story4')" class="flex flex-col items-center gap-1.5 cursor-pointer flex-shrink-0 group">
+                            <div class="w-16 h-16 rounded-full p-0.5 border-2 border-gray-300 dark:border-gray-700 group-hover:border-brand-500 transition">
+                                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=200" alt="Estilo" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-xs font-medium text-gray-700 dark:text-gray-300 flex items-center gap-1">
+                                Estilo <i id="badge-story4-icon" class="ph-bold ph-circle text-[10px] text-gray-400"></i>
+                            </span>
+                        </div>
+                        <div onclick="openConsigna('story5')" class="flex flex-col items-center gap-1.5 cursor-pointer flex-shrink-0 group">
+                            <div class="w-16 h-16 rounded-full p-0.5 border-2 border-gray-300 dark:border-gray-700 group-hover:border-brand-500 transition">
+                                <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=200" alt="Diario" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-xs font-medium text-gray-700 dark:text-gray-300 flex items-center gap-1">
+                                Diario <i id="badge-story5-icon" class="ph-bold ph-circle text-[10px] text-gray-400"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Posts Grid Model (Consignas 10 a 18) -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-center border-t border-gray-200 dark:border-gray-800 pt-4">
+                    <span class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-900 dark:text-white border-t-2 border-gray-900 dark:border-white -mt-4 pt-2">
+                        <i class="ph-bold ph-squares-four text-base"></i> Publicaciones Analizables (Consignas 10-18)
+                    </span>
+                </div>
+                <div id="reflection-posts-grid" class="grid grid-cols-3 gap-1.5 sm:gap-4">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- PESTAÑA 3: ESPACIO PERSONAL -->
+        <section id="tab-content-custom-profile" class="space-y-6 hidden">
+            
+            <!-- Personal Banner -->
+            <div class="bg-gradient-to-r from-purple-900/90 to-pink-900/90 text-white rounded-2xl p-5 shadow-lg border border-purple-700/50 relative overflow-hidden">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-purple-200">
+                            <i class="ph-bold ph-user-focus"></i>
+                            <span>Espacio Personal</span>
+                        </div>
+                        <h2 class="text-lg font-serif font-bold text-white">Tu Perfil Creado</h2>
+                        <p class="text-xs text-purple-100 max-w-2xl leading-relaxed">
+                            Tras reflexionar sobre la guía, construye aquí tu propio perfil digital como lo desees. Este espacio es para ti y se guarda automáticamente en tu navegador. Puedes imprimirlo o descargarlo únicamente si lo deseas.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="printCustomProfile()" class="px-4 py-2 bg-white text-purple-950 hover:bg-purple-100 rounded-xl text-xs font-bold transition shadow flex items-center gap-2">
+                            <i class="ph-bold ph-printer text-base"></i>
+                            <span>Compartir / Descargar Vista</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Profile Container -->
+            <div id="printable-custom-profile" class="printable-section bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm p-4 sm:p-8 space-y-6">
+                
+                <!-- Custom Profile Header Info -->
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-10 pb-6 border-b border-gray-100 dark:border-gray-800">
+                    
+                    <!-- Editable Avatar -->
+                    <div class="relative group">
+                        <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full story-ring p-1 shadow-md overflow-hidden">
+                            <img id="custom-avatar-preview" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=400" alt="Avatar Personal" class="w-full h-full object-cover rounded-full border-2 border-white dark:border-gray-900">
+                        </div>
+                        <label class="absolute bottom-1 right-1 bg-brand-600 hover:bg-brand-700 text-white p-2 rounded-full shadow-lg cursor-pointer border-2 border-white dark:border-gray-900 transition">
+                            <i class="ph-bold ph-camera text-sm"></i>
+                            <input type="file" accept="image/*" class="hidden" onchange="uploadCustomAvatar(event)">
+                        </label>
+                    </div>
+
+                    <!-- Editable User Info -->
+                    <div class="flex-1 space-y-4 w-full text-center sm:text-left">
+                        
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                            <div class="flex-1 flex items-center gap-1 border-b border-gray-200 dark:border-gray-700 pb-1">
+                                <span class="text-gray-400 font-bold">@</span>
+                                <input type="text" id="custom-username" value="mi_nombre_digital" onchange="saveCustomProfileData()" class="bg-transparent text-lg font-bold text-gray-900 dark:text-white focus:outline-none w-full" placeholder="usuario">
+                            </div>
+                        </div>
+
+                        <!-- Editable Metrics -->
+                        <div class="flex justify-center sm:justify-start space-x-6 py-2">
+                            <div class="text-center sm:text-left">
+                                <span class="block text-base font-bold text-gray-900 dark:text-white" id="custom-post-count">0</span>
+                                <span class="text-xs text-gray-500">Publicaciones</span>
+                            </div>
+                            <div class="text-center sm:text-left">
+                                <input type="text" id="custom-followers" value="1,250" onchange="saveCustomProfileData()" class="w-20 text-center sm:text-left font-bold text-base bg-transparent border-b border-dashed border-gray-300 dark:border-gray-700 focus:outline-none text-gray-900 dark:text-white">
+                                <span class="block text-xs text-gray-500">Seguidores</span>
+                            </div>
+                            <div class="text-center sm:text-left">
+                                <input type="text" id="custom-following" value="480" onchange="saveCustomProfileData()" class="w-20 text-center sm:text-left font-bold text-base bg-transparent border-b border-dashed border-gray-300 dark:border-gray-700 focus:outline-none text-gray-900 dark:text-white">
+                                <span class="block text-xs text-gray-500">Seguidos</span>
+                            </div>
+                        </div>
+
+                        <!-- Editable Bio -->
+                        <div class="p-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/60 space-y-1">
+                            <input type="text" id="custom-displayname" value="Mi Nombre Real / Creativo" onchange="saveCustomProfileData()" class="font-semibold text-sm bg-transparent w-full focus:outline-none text-gray-900 dark:text-white" placeholder="Nombre visible">
+                            <textarea id="custom-bio" rows="2" onchange="saveCustomProfileData()" class="w-full text-xs bg-transparent focus:outline-none text-gray-600 dark:text-gray-300 resize-none" placeholder="Escribe tu biografía auténtica o construida aquí..."></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Custom Stories Section -->
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Mis Historias Destacadas</h4>
+                        <span class="text-[11px] text-gray-400">Haz clic en una historia para cambiar foto/título</span>
+                    </div>
+
+                    <div id="custom-stories-container" class="flex items-center gap-4 overflow-x-auto pb-2 custom-scrollbar">
+                        <!-- 5 Editable Stories loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- Custom Grid Section -->
+                <div class="space-y-4 pt-4 border-t border-gray-100 dark:border-gray-800">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold uppercase tracking-widest text-gray-900 dark:text-white flex items-center gap-2">
+                            <i class="ph-bold ph-squares-four text-base"></i> Mi Feed Creado
+                        </span>
+                        <button onclick="addCustomPostModal()" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 shadow-sm transition">
+                            <i class="ph-bold ph-plus-circle text-sm"></i> Agregar Publicación
+                        </button>
+                    </div>
+
+                    <!-- 3x3 Grid for User Posts -->
+                    <div id="custom-posts-grid" class="grid grid-cols-3 gap-1.5 sm:gap-4">
+                        <!-- Custom Posts Populated Here -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Consigna Answer Modal -->
+    <div id="consigna-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 hidden transition-opacity">
+        <div class="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800 flex flex-col max-h-[90vh]">
+            
+            <div class="p-4 sm:p-5 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center bg-gray-50/50 dark:bg-gray-800/50">
+                <div class="flex items-center space-x-3">
+                    <span id="modal-category-badge" class="px-2.5 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">Categoría</span>
+                    <span id="modal-status-badge" class="text-xs flex items-center gap-1 text-gray-500"><i class="ph-bold ph-circle"></i> Pendiente</span>
+                </div>
+                <button onclick="closeConsignaModal()" class="p-1 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <i class="ph-bold ph-x text-xl"></i>
+                </button>
+            </div>
+
+            <div class="p-4 sm:p-6 overflow-y-auto space-y-4 custom-scrollbar">
+                
+                <!-- Static Image Preview for Reflection -->
+                <div id="modal-image-container" class="w-full rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 relative h-48 sm:h-56">
+                    <img id="modal-image" src="" alt="Post media" class="w-full h-full object-cover">
+                    <div id="modal-image-caption" class="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/80 to-transparent text-white text-xs"></div>
+                </div>
+
+                <div>
+                    <h3 id="modal-title" class="text-lg font-serif font-bold text-gray-900 dark:text-white">Título de Consigna</h3>
+                    <div class="mt-2 p-3.5 bg-brand-50/50 dark:bg-brand-950/20 border border-brand-100 dark:border-brand-900/40 rounded-xl">
+                        <p id="modal-question" class="text-sm text-gray-800 dark:text-gray-200 leading-relaxed font-medium">Pregunta reflexiva...</p>
+                    </div>
+                </div>
+
+                <div class="space-y-2 bg-gradient-to-br from-amber-50/60 to-purple-50/60 dark:from-amber-950/20 dark:to-purple-950/20 p-3.5 rounded-xl border border-amber-200/60 dark:border-amber-900/40 text-xs">
+                    <div class="flex items-center gap-1.5 font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wider text-[11px]">
+                        <i class="ph-bold ph-quotes text-base text-brand-600"></i>
+                        <span>Nota de reflexión teórica (Benjamin & Han)</span>
+                    </div>
+                    <p id="modal-theory-note" class="text-gray-700 dark:text-gray-300 leading-relaxed italic">Conceptos clave teóricos...</p>
+                </div>
+
+                <div class="space-y-2">
+                    <label for="user-response-input" class="block text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-300">
+                        Tu Respuesta / Reflexión:
+                    </label>
+                    <textarea id="user-response-input" rows="4" 
+                        class="w-full p-3 text-sm rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-brand-500 outline-none transition"
+                        placeholder="Escribe tu análisis crítico aquí..."></textarea>
+                </div>
+
+            </div>
+
+            <div class="p-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between bg-gray-50/50 dark:bg-gray-800/50">
+                <span class="text-xs text-gray-400">Autoguardado local</span>
+                <div class="flex space-x-2">
+                    <button onclick="closeConsignaModal()" class="px-4 py-2 text-xs font-medium text-gray-600 dark:text-gray-300 rounded-lg">Cancelar</button>
+                    <button onclick="saveCurrentResponse()" class="px-4 py-2 text-xs font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-sm transition flex items-center gap-1.5">
+                        <i class="ph-bold ph-floppy-disk text-sm"></i> Guardar
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Reflection Summary Report Modal -->
+    <div id="summary-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 hidden">
+        <div class="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800 flex flex-col max-h-[92vh]">
+            
+            <div class="p-4 sm:p-5 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center bg-gray-50/50 dark:bg-gray-800/50">
+                <div class="flex items-center space-x-2">
+                    <i class="ph-bold ph-file-text text-xl text-brand-600"></i>
+                    <h2 class="font-serif font-bold text-lg text-gray-900 dark:text-white">Ficha Final de Reflexión</h2>
+                </div>
+                <button onclick="closeSummaryModal()" class="p-1 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <i class="ph-bold ph-x text-xl"></i>
+                </button>
+            </div>
+
+            <div class="printable-section p-5 sm:p-8 overflow-y-auto custom-scrollbar space-y-6" id="printable-report">
+                <div class="border-b border-gray-200 dark:border-gray-800 pb-4">
+                    <h1 class="text-2xl font-serif font-bold text-gray-900 dark:text-white">Ficha de Reflexión: La Identidad Personal en Redes Sociales</h1>
+                    <p class="text-xs text-gray-500 mt-1">Marco teórico: Walter Benjamin & Byung-Chul Han</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mt-4 text-xs">
+                        <div class="bg-gray-50 dark:bg-gray-800 p-2.5 rounded-lg">
+                            <span class="text-gray-400 block">Estudiante:</span>
+                            <input type="text" id="student-name" placeholder="Escribe tu nombre completo..." class="bg-transparent font-medium text-gray-800 dark:text-gray-200 w-full outline-none border-b border-dashed border-gray-300 dark:border-gray-600">
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-800 p-2.5 rounded-lg">
+                            <span class="text-gray-400 block">Estado de avance:</span>
+                            <span id="summary-completion-status" class="font-semibold text-brand-600">0 de 18 Completadas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="summary-responses-list" class="space-y-4"></div>
+            </div>
+
+            <div class="p-4 border-t border-gray-100 dark:border-gray-800 flex flex-wrap items-center justify-between gap-2 bg-gray-50/50 dark:bg-gray-800/50">
+                <button onclick="copyAnswersToClipboard()" class="px-3.5 py-2 text-xs font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 transition flex items-center gap-1.5">
+                    <i class="ph-bold ph-copy text-sm"></i> Copiar Texto
+                </button>
+                <div class="flex space-x-2">
+                    <button onclick="closeSummaryModal()" class="px-3.5 py-2 text-xs font-medium text-gray-600 dark:text-gray-300">Cerrar</button>
+                    <button onclick="window.print()" class="px-4 py-2 text-xs font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-sm transition flex items-center gap-1.5">
+                        <i class="ph-bold ph-printer text-sm"></i> Imprimir / PDF
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Edit Custom Story Modal -->
+    <div id="edit-story-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-md p-5 space-y-4 border border-gray-200 dark:border-gray-800">
+            <h3 class="font-bold text-base text-gray-900 dark:text-white">Editar Historia Destacada</h3>
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-medium mb-1">Título de la historia:</label>
+                    <input type="text" id="edit-story-title" class="w-full p-2.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-gray-900 dark:text-white">
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Subir imagen:</label>
+                    <input type="file" id="edit-story-file" accept="image/*" class="w-full text-xs text-gray-500">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeEditStoryModal()" class="px-3 py-1.5 text-xs text-gray-500">Cancelar</button>
+                <button onclick="saveEditStory()" class="px-4 py-1.5 text-xs font-semibold bg-brand-600 text-white rounded-lg">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Custom Post Modal -->
+    <div id="add-custom-post-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-md p-5 space-y-4 border border-gray-200 dark:border-gray-800">
+            <h3 class="font-bold text-base text-gray-900 dark:text-white" id="custom-post-modal-title">Agregar Publicación a tu Perfil</h3>
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-medium mb-1">Imagen de la publicación:</label>
+                    <input type="file" id="custom-post-file" accept="image/*" class="w-full text-xs text-gray-500">
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">O URL de la imagen:</label>
+                    <input type="text" id="custom-post-url" placeholder="https://..." class="w-full p-2.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-gray-900 dark:text-white">
+                </div>
+                <div>
+                    <label class="block font-medium mb-1">Pie de foto / Caption:</label>
+                    <textarea id="custom-post-caption" rows="3" placeholder="Escribe un pie de foto..." class="w-full p-2.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-gray-900 dark:text-white"></textarea>
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeAddCustomPostModal()" class="px-3 py-1.5 text-xs text-gray-500">Cancelar</button>
+                <button onclick="saveCustomPost()" class="px-4 py-1.5 text-xs font-semibold bg-brand-600 text-white rounded-lg">Publicar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-gray-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center space-x-2 text-xs transform translate-y-20 opacity-0 transition-all duration-300">
+        <i class="ph-bold ph-check-circle text-green-400 text-base"></i>
+        <span id="toast-msg">Notificación</span>
+    </div>
+
+    <script>
+        /* Consignas Data (18 Items con Preguntas y Notas Teóricas Exactas) */
+        const consignasData = {
+            avatar: {
+                title: "1. Foto de Perfil (Avatar)",
+                category: "Identidad & Percepción",
+                question: "¿Qué aspectos de tu identidad eliges mostrar y cuáles ocultas en tu foto de perfil? ¿Por qué seleccionaste esa imagen específica?",
+                theoryNote: "Walter Benjamin advierte la pérdida del 'aura' (la presencia única e irrepetible) al transformar la imagen del sujeto en un objeto editable y reproducible. Por su parte, Byung-Chul Han señala que en la 'sociedad de la transparencia' el sujeto se exhibe a sí mismo como mercancía visual, eliminando el misterio y la negatividad del yo verdadero.",
+                image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600"
+            },
+            followers: {
+                title: "2. Número de Seguidores",
+                category: "Cuantificación Social",
+                question: "¿De qué manera influye la cantidad de seguidores en la percepción de tu propio valor o estatus en las redes sociales?",
+                theoryNote: "Benjamin observa el tránsito hacia la masificación, donde el público busca apropiarse de los objetos mediante métricas. Han argumenta que la masa de seguidores sustituye a la verdadera comunidad: no hay lazo afectivo real, sino acumulación numérica en un espacio de constante autoevaluación digital.",
+                image: null
+            },
+            following: {
+                title: "3. Número de Seguidos",
+                category: "Curaduría del Entorno",
+                question: "¿Qué criterios utilizas para decidir a quién seguir y cómo moldea esa selección la forma en que ves el mundo cotidiano?",
+                theoryNote: "Para Benjamin, la mediación técnica construye una 'segunda naturaleza' que filtra el mundo exterior. Han sostiene que al seguir solo aquello que nos agrada o afirma, caemos en la 'expulsión de lo distinto', creando un infierno de lo igual donde la alteridad real desaparece.",
+                image: null
+            },
+            bio: {
+                title: "4. Biografía / Descripción",
+                category: "Síntesis del Yo",
+                question: "¿Es posible resumir tu identidad auténtica en unas pocas palabras, etiquetas o emojis? ¿Qué queda por fuera?",
+                theoryNote: "Benjamin señala la reducción de la experiencia comunicativa a mera información fragmentada. Han añade que en la 'sociedad del rendimiento' la biografía se convierte en una presentación optimizada y publicitaria del 'yo corporativo', excluyendo las contradicciones e incertidumbres profundas.",
+                image: null
+            },
+            story1: {
+                title: "5. Historia Destacada: Viajes",
+                category: "Experiencia & Territorio",
+                question: "¿Disfrutas igual de un viaje si no lo registras o compartes en tus historias? ¿Qué cambia al mostrarlo?",
+                theoryNote: "Benjamin contrasta la vivencia única e irrepetible del lugar con su registro masivo. Han enfatiza que hoy la experiencia sólo parece 'real' si se convierte en valor de exhibición: el viaje deja de ser contemplativo para volverse un trofeo visual.",
+                image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=600"
+            },
+            story2: {
+                title: "6. Historia Destacada: Amigos",
+                category: "Vínculos & Espectáculo",
+                question: "¿Por qué sentimos la necesidad de publicar fotos con amigos? ¿Transforma la cámara la espontaneidad del encuentro?",
+                theoryNote: "Benjamin muestra cómo la técnica estetiza las relaciones sociales. Han advierte sobre la 'sociabilidad sin otro': los amigos expuestos en redes se vuelven confirmaciones estéticas del propio yo antes que vínculos interpersonales con resistencia o conflicto.",
+                image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=600"
+            },
+            story3: {
+                title: "7. Historia Destacada: Reflexión",
+                category: "Pensamiento en Redes",
+                question: "Al compartir frases o reflexiones profundas, ¿buscas el debate sincero o proyectar una determinada imagen intelectual?",
+                theoryNote: "Benjamin diferencia el 'valor de culto' (contemplación profunda del pensamiento) del 'valor de exhibición' (frases para el consumo rápido). Han señala cómo la aceleración digital liquida el silencio y el pensamiento demorado en favor del 'click' instantáneo.",
+                image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=600"
+            },
+            story4: {
+                title: "8. Historia Destacada: Estilo",
+                category: "Estética & Algoritmo",
+                question: "¿Tu estilo personal es fruto de tus gustos auténticos o responde a las tendencias que imponen los algoritmos?",
+                theoryNote: "Benjamin identifica la moda como la repetición de la mercancía. Han postula que el algoritmo produce un imperativo de pulidez y homogeneización estética donde lo realmente diferente es eliminado por la 'sociedad del me gusta'.",
+                image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=600"
+            },
+            story5: {
+                title: "9. Historia Destacada: Diario / Cotidianidad",
+                category: "El Show del Yo",
+                question: "¿Por qué convertimos lo cotidiano en un espectáculo público? ¿Qué ocurre con lo que no se publica?",
+                theoryNote: "Benjamin habla de la politización/estetización de la vida ordinaria. Han describe la 'autoexplotación transparente': el propio sujeto se vigila y se expone voluntariamente, creyendo que sólo lo expuesto existe realmente.",
+                image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=600"
+            },
+            post1: {
+                title: "10. Publicación 1: Paisaje Natural",
+                category: "Primera vs. Segunda Naturaleza",
+                question: "¿Contemplas la naturaleza de la misma forma cuando buscas la mejor toma fotográfica que cuando no llevas el teléfono?",
+                theoryNote: "Benjamin denomina 'segunda naturaleza' al entorno tecnológicamente mediado que reemplaza la experiencia directa. Han añade que la naturaleza se degrada a un simple 'telón de fondo digital' optimizado para la pantalla.",
+                image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=600",
+                caption: "Conectando con lo esencial 🌿🌄 #nature"
+            },
+            post2: {
+                title: "11. Publicación 2: Grupo de Amigos",
+                category: "Pertenencia y Posar",
+                question: "¿La pose para la cámara en grupo sustituye el disfrute genuino del momento presente?",
+                theoryNote: "Benjamin analiza la 'performatividad ante el aparato' fotográfico. Han destaca cómo las emociones colectivas son funcionalizadas para generar contenido visible en lugar de vivencias comunitarias duraderas.",
+                image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=600",
+                caption: "Los de siempre ❤️✨ #moments"
+            },
+            post3: {
+                title: "12. Publicación 3: Concierto / Evento",
+                category: "El Acontecimiento Registrado",
+                question: "¿Por qué muchos asistentes prefieren grabar un recital a través del teléfono en lugar de mirarlo directamente?",
+                theoryNote: "Benjamin diagnostica el ansia de la masa por acercarse al objeto destruyendo su aura irrepetible mediante el grabado. Han afirma que se prioriza la 'evidencia de consumo' sobre el acontecimiento estético singular.",
+                image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=600",
+                caption: "Noche inolvidable 🎸🔥 #live"
+            },
+            post4: {
+                title: "13. Publicación 4: Selfie Personal",
+                category: "Intimidad vs. Exhibición",
+                question: "¿Buscamos en la selfie la aprobación ajena o una confirmación de quiénes somos?",
+                theoryNote: "Benjamin muestra la sustitución del valor de culto por el de exhibición. Han sostiene que la selfie no es narcisismo sano, sino una huida de la sensación de vacío interior de la sociedad del rendimiento.",
+                image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=600",
+                caption: "Vibra de domingo ☕ #selfie"
+            },
+            post5: {
+                title: "14. Publicación 5: Foto de Mascota",
+                category: "Refugio Afectivo & Intimidad",
+                question: "¿De qué maneras el entorno doméstico y el vínculo con una mascota funcionan como un refugio afectivo? ¿Qué ocurre con la intimidad de ese descanso cuando lo fotografiamos para exponerlo en la red?",
+                theoryNote: "Byung-Chul Han señala que ante la aceleración y la exigencia de rendimiento en la vida contemporánea, el espacio doméstico y el vínculo no humano representan un refugio libre de la mirada utilitaria. Sin embargo, al fotografiar e hipervincular ese lugar de calma a la red, la frontera entre el refugio íntimo y el escaparate público se vuelve difusa.",
+                image: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=600",
+                caption: "Compañero incondicional 🐾 #dog"
+            },
+            post6: {
+                title: "15. Publicación 6: Objeto de Estatus / Auto",
+                category: "Consumo e Identidad",
+                question: "¿Definen los objetos materiales que mostramos nuestro valor real como personas?",
+                theoryNote: "Benjamin expone el fetichismo de la mercancía expuesta en los pasajes comerciales. Han afirma que en la era digital los objetos se convierten en 'no-cosas' (información y símbolos de estatus) que alimentan la autoexplotación.",
+                image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600",
+                caption: "Resultados del esfuerzo 🚗💨 #lifestyle"
+            },
+            post7: {
+                title: "16. Publicación 7: Pareja / Vínculo Amoroso",
+                category: "Amor Transparente & Exposición",
+                question: "¿Cómo afecta la mirada del público a la vivencia íntima de una relación cuando se expone constantemente en el feed?",
+                theoryNote: "Benjamin advierte la profanación de lo secreto al transformar lo íntimo en valor de cambio público. Han señala en 'La agonía del Eros' que la exposición total del vínculo destruye la distancia y el misterio necesarios para el verdadero amor al volverlo una mera mercancía visible.",
+                image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&q=80&w=600",
+                caption: "Juntos es mejor 💫❤️ #couplegoals"
+            },
+            post8: {
+                title: "17. Publicación 8: Espacio de Trabajo / Productividad",
+                category: "Rendimiento & Autoexplotación",
+                question: "¿En qué medida estetizar la rutina de trabajo convierte el esfuerzo y el agotamiento en un espectáculo apetecible?",
+                theoryNote: "Benjamin aborda la mecanización del cuerpo en la producción moderna. Han afirma en 'La sociedad del cansancio' que el sujeto contemporáneo se autoexplota bajo la ilusión de libertad, exponiendo su productividad como un logro que enmascara el agotamiento existencial.",
+                image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600",
+                caption: "Modo enfoque activado 💻⚡ #hustle"
+            },
+            post9: {
+                title: "18. Publicación 9: Paseo por la Ciudad",
+                category: "Flâneur vs. Scroll Infinito",
+                question: "¿En qué se diferencia el paseo del espectador que navega en pantallas del 'Flâneur' urbano descrito por Benjamin?",
+                theoryNote: "Benjamin inmortaliza al 'Flâneur', el paseante que se pierde en la multitud observando la urbe sin rumbo prefijado. Han sostiene que el usuario digital ya no vaga libremente sino que cae en la hiperatención del scroll infinito, atrapado en un laberinto algorítmico sin espacio para la sorpresa auraica.",
+                image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&q=80&w=600",
+                caption: "Perdiéndome en la ciudad 🏙️✨ #urban"
+            }
+        };
+
+        /* State Management */
+        let userResponses = JSON.parse(localStorage.getItem('reflexiones_respuestas_benjamin_han')) || {};
+        let activeConsignaKey = null;
+
+        // Custom Profile User Data
+        let customProfile = JSON.parse(localStorage.getItem('custom_user_profile_data')) || {
+            username: 'mi_nombre_digital',
+            displayname: 'Mi Nombre Creativo',
+            bio: 'Creando mi propio perfil con conciencia crítica. 🌿✨',
+            followers: '1,250',
+            following: '480',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=400',
+            stories: [
+                { title: 'Recuerdos', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=200' },
+                { title: 'Lecturas', img: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=200' },
+                { title: 'Proyectos', img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=200' },
+                { title: 'Música', img: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=200' },
+                { title: 'Lugares', img: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=200' }
+            ],
+            posts: [
+                { img: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=600', caption: 'Mi espacio de desconexión.' },
+                { img: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&q=80&w=600', caption: 'Creando proyectos.' }
+            ]
+        };
+
+        let activeStoryIndexToEdit = null;
+
+        window.onload = function() {
+            renderReflectionPostsGrid();
+            updateAllBadgesAndProgress();
+            renderCustomProfile();
+            setupTheme();
+        };
+
+        /* Tab Switching */
+        function switchTab(tab) {
+            const btnIntro = document.getElementById('tab-btn-intro');
+            const btnRef = document.getElementById('tab-btn-reflection');
+            const btnCust = document.getElementById('tab-btn-custom-profile');
+
+            const contentIntro = document.getElementById('tab-content-intro');
+            const contentRef = document.getElementById('tab-content-reflection');
+            const contentCust = document.getElementById('tab-content-custom-profile');
+
+            // Class presets
+            const activeClass = "flex-1 py-3 text-center border-b-2 border-brand-600 text-brand-600 dark:text-brand-400 font-bold flex items-center justify-center gap-2 transition";
+            const inactiveClass = "flex-1 py-3 text-center border-b-2 border-transparent text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex items-center justify-center gap-2 transition";
+
+            if (tab === 'intro') {
+                contentIntro.classList.remove('hidden');
+                contentRef.classList.add('hidden');
+                contentCust.classList.add('hidden');
+
+                btnIntro.className = activeClass;
+                btnRef.className = inactiveClass;
+                btnCust.className = inactiveClass;
+            } else if (tab === 'reflection') {
+                contentIntro.classList.add('hidden');
+                contentRef.classList.remove('hidden');
+                contentCust.classList.add('hidden');
+
+                btnIntro.className = inactiveClass;
+                btnRef.className = activeClass;
+                btnCust.className = inactiveClass;
+            } else {
+                contentIntro.classList.add('hidden');
+                contentRef.classList.add('hidden');
+                contentCust.classList.remove('hidden');
+
+                btnIntro.className = inactiveClass;
+                btnRef.className = inactiveClass;
+                btnCust.className = activeClass;
+            }
+        }
+
+        /* --- TAB 2: FICHA DE REFLEXION LOGIC --- */
+        function renderReflectionPostsGrid() {
+            const grid = document.getElementById('reflection-posts-grid');
+            grid.innerHTML = '';
+
+            for (let i = 1; i <= 9; i++) {
+                const key = `post${i}`;
+                const data = consignasData[key];
+                const isAnswered = userResponses[key] && userResponses[key].trim().length > 0;
+
+                const card = document.createElement('div');
+                card.className = 'relative group aspect-square rounded-xl overflow-hidden cursor-pointer bg-gray-200 dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-800/50';
+                card.onclick = () => openConsigna(key);
+
+                card.innerHTML = `
+                    <img src="${data.image}" alt="${data.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-200 p-2 sm:p-3 flex flex-col justify-end text-white">
+                        <span class="text-[10px] font-semibold text-brand-300 uppercase">${data.category}</span>
+                        <p class="text-xs font-bold truncate">${data.title}</p>
+                    </div>
+                    <div class="absolute top-2 right-2 p-1.5 rounded-full ${isAnswered ? 'bg-emerald-500 text-white' : 'bg-black/50 backdrop-blur-md text-white/80'} shadow-md">
+                        <i class="ph-bold ${isAnswered ? 'ph-check-circle' : 'ph-question'} text-xs"></i>
+                    </div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        function openConsigna(key) {
+            activeConsignaKey = key;
+            const data = consignasData[key];
+            if (!data) return;
+
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-category-badge').innerText = data.category;
+            document.getElementById('modal-question').innerText = data.question;
+            document.getElementById('modal-theory-note').innerText = data.theoryNote;
+
+            const imgContainer = document.getElementById('modal-image-container');
+            if (data.image) {
+                imgContainer.classList.remove('hidden');
+                document.getElementById('modal-image').src = data.image;
+                document.getElementById('modal-image-caption').innerText = data.caption || data.title;
+            } else {
+                imgContainer.classList.add('hidden');
+            }
+
+            const existing = userResponses[key] || '';
+            document.getElementById('user-response-input').value = existing;
+
+            const statusBadge = document.getElementById('modal-status-badge');
+            if (existing.trim().length > 0) {
+                statusBadge.innerHTML = `<span class="text-emerald-500 font-semibold flex items-center gap-1"><i class="ph-bold ph-check-circle"></i> Respondido</span>`;
+            } else {
+                statusBadge.innerHTML = `<span class="text-amber-500 font-semibold flex items-center gap-1"><i class="ph-bold ph-clock"></i> Pendiente</span>`;
+            }
+
+            document.getElementById('consigna-modal').classList.remove('hidden');
+        }
+
+        function closeConsignaModal() {
+            document.getElementById('consigna-modal').classList.add('hidden');
+            activeConsignaKey = null;
+        }
+
+        function saveCurrentResponse() {
+            if (!activeConsignaKey) return;
+            const text = document.getElementById('user-response-input').value;
+            userResponses[activeConsignaKey] = text;
+            localStorage.setItem('reflexiones_respuestas_benjamin_han', JSON.stringify(userResponses));
+
+            updateAllBadgesAndProgress();
+            renderReflectionPostsGrid();
+            closeConsignaModal();
+            showToast('Respuesta guardada con éxito.');
+        }
+
+        function updateAllBadgesAndProgress() {
+            const keys = Object.keys(consignasData);
+            let answeredCount = 0;
+
+            keys.forEach(key => {
+                const hasAnswer = userResponses[key] && userResponses[key].trim().length > 0;
+                if (hasAnswer) answeredCount++;
+
+                if (key === 'avatar') {
+                    const badge = document.getElementById('badge-avatar');
+                    if (badge) badge.className = `absolute bottom-0 right-0 ${hasAnswer ? 'bg-emerald-500' : 'bg-brand-600'} text-white p-2 rounded-full shadow-lg border-2 border-white dark:border-gray-900 flex items-center justify-center`;
+                }
+                if (key === 'followers') {
+                    const icon = document.getElementById('badge-followers-icon');
+                    if (icon) icon.className = `ph-bold ${hasAnswer ? 'ph-check-circle text-emerald-500' : 'ph-circle text-gray-400'} text-xs`;
+                }
+                if (key === 'following') {
+                    const icon = document.getElementById('badge-following-icon');
+                    if (icon) icon.className = `ph-bold ${hasAnswer ? 'ph-check-circle text-emerald-500' : 'ph-circle text-gray-400'} text-xs`;
+                }
+                if (key === 'bio') {
+                    const badge = document.getElementById('badge-bio');
+                    if (badge) {
+                        badge.innerText = hasAnswer ? '✓ Respondido' : 'Reflexionar Bio';
+                        badge.className = `text-xs px-2 py-1 ${hasAnswer ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'} rounded font-medium`;
+                    }
+                }
+                if (key.startsWith('story')) {
+                    const icon = document.getElementById(`badge-${key}-icon`);
+                    if (icon) icon.className = `ph-bold ${hasAnswer ? 'ph-check-circle text-emerald-500' : 'ph-circle text-gray-400'} text-[10px]`;
+                }
+            });
+
+            const total = keys.length;
+            const percentage = Math.round((answeredCount / total) * 100);
+
+            document.getElementById('badge-progress-tab').innerText = `${answeredCount}/${total}`;
+            document.getElementById('progress-percentage').innerText = `${percentage}%`;
+            document.getElementById('summary-completion-status').innerText = `${answeredCount} de ${total} Preguntas Completadas`;
+        }
+
+        function openSummaryModal() {
+            const listContainer = document.getElementById('summary-responses-list');
+            listContainer.innerHTML = '';
+
+            Object.keys(consignasData).forEach((key) => {
+                const item = consignasData[key];
+                const answer = userResponses[key] || '';
+                const isAnswered = answer.trim().length > 0;
+
+                const card = document.createElement('div');
+                card.className = 'p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30 space-y-2';
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-brand-600 dark:text-brand-400">${item.title} - ${item.category}</span>
+                        <span class="text-xs ${isAnswered ? 'text-emerald-600 font-semibold' : 'text-amber-500 italic'}">
+                            ${isAnswered ? '✓ Respondida' : 'Sin responder'}
+                        </span>
+                    </div>
+                    <p class="text-xs text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 p-2.5 rounded-lg border border-gray-100 dark:border-gray-800">
+                        <strong>Pregunta:</strong> ${item.question}
+                    </p>
+                    <p class="text-[11px] text-amber-800 dark:text-amber-300 italic bg-amber-50/50 dark:bg-amber-950/20 p-2 rounded">
+                        <strong>Nota de reflexión:</strong> ${item.theoryNote}
+                    </p>
+                    <div class="mt-2">
+                        <span class="text-[11px] font-semibold text-gray-500 uppercase">Respuesta del Estudiante:</span>
+                        <p class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-line mt-0.5 p-2 bg-white dark:bg-gray-950 rounded border border-gray-200 dark:border-gray-800">
+                            ${isAnswered ? answer : '<em>Aún no has escrito una reflexión para esta consigna.</em>'}
+                        </p>
+                    </div>
+                `;
+                listContainer.appendChild(card);
+            });
+
+            document.getElementById('summary-modal').classList.remove('hidden');
+        }
+
+        function closeSummaryModal() {
+            document.getElementById('summary-modal').classList.add('hidden');
+        }
+
+        function copyAnswersToClipboard() {
+            const studentName = document.getElementById('student-name').value || 'Anónimo';
+            let formattedText = `FICHA DE REFLEXIÓN: IDENTIDAD Y REDES SOCIALES\n`;
+            formattedText += `Estudiante: ${studentName}\n`;
+            formattedText += `--------------------------------------------------\n\n`;
+
+            Object.keys(consignasData).forEach((key) => {
+                const item = consignasData[key];
+                const ans = userResponses[key] || 'Sin respuesta';
+                formattedText += `${item.title} (${item.category})\n`;
+                formattedText += `Pregunta: ${item.question}\n`;
+                formattedText += `Respuesta: ${ans}\n\n`;
+            });
+
+            const textarea = document.createElement('textarea');
+            textarea.value = formattedText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            showToast('Ficha copiada al portapapeles.');
+        }
+
+        /* --- TAB 3: ESPACIO PERSONAL LOGIC --- */
+        function renderCustomProfile() {
+            document.getElementById('custom-username').value = customProfile.username;
+            document.getElementById('custom-displayname').value = customProfile.displayname;
+            document.getElementById('custom-bio').value = customProfile.bio;
+            document.getElementById('custom-followers').value = customProfile.followers;
+            document.getElementById('custom-following').value = customProfile.following;
+            document.getElementById('custom-avatar-preview').src = customProfile.avatar;
+
+            // Render Custom Stories
+            const storiesContainer = document.getElementById('custom-stories-container');
+            storiesContainer.innerHTML = '';
+            customProfile.stories.forEach((st, idx) => {
+                const stDiv = document.createElement('div');
+                stDiv.className = 'flex flex-col items-center gap-1 cursor-pointer flex-shrink-0 group';
+                stDiv.onclick = () => openEditStoryModal(idx);
+                stDiv.innerHTML = `
+                    <div class="w-16 h-16 rounded-full p-0.5 border-2 border-brand-500 group-hover:scale-105 transition">
+                        <img src="${st.img}" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <span class="text-xs font-medium text-gray-700 dark:text-gray-300 truncate w-16 text-center">${st.title}</span>
+                `;
+                storiesContainer.appendChild(stDiv);
+            });
+
+            // Render Custom Posts Grid
+            const postsGrid = document.getElementById('custom-posts-grid');
+            postsGrid.innerHTML = '';
+            document.getElementById('custom-post-count').innerText = customProfile.posts.length;
+
+            customProfile.posts.forEach((pst, idx) => {
+                const pstDiv = document.createElement('div');
+                pstDiv.className = 'relative group aspect-square rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-sm border border-gray-200 dark:border-gray-800';
+                pstDiv.innerHTML = `
+                    <img src="${pst.img}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition p-2 flex flex-col justify-between text-white text-xs">
+                        <p class="line-clamp-3">${pst.caption}</p>
+                        <button onclick="deleteCustomPost(${idx})" class="self-end p-1 text-red-400 hover:text-red-300">
+                            <i class="ph-bold ph-trash text-base"></i>
+                        </button>
+                    </div>
+                `;
+                postsGrid.appendChild(pstDiv);
+            });
+        }
+
+        function saveCustomProfileData() {
+            customProfile.username = document.getElementById('custom-username').value;
+            customProfile.displayname = document.getElementById('custom-displayname').value;
+            customProfile.bio = document.getElementById('custom-bio').value;
+            customProfile.followers = document.getElementById('custom-followers').value;
+            customProfile.following = document.getElementById('custom-following').value;
+
+            localStorage.setItem('custom_user_profile_data', JSON.stringify(customProfile));
+            showToast('Perfil actualizado.');
+        }
+
+        function uploadCustomAvatar(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                customProfile.avatar = event.target.result;
+                saveCustomProfileData();
+                renderCustomProfile();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        /* Custom Story Editing */
+        function openEditStoryModal(index) {
+            activeStoryIndexToEdit = index;
+            document.getElementById('edit-story-title').value = customProfile.stories[index].title;
+            document.getElementById('edit-story-modal').classList.remove('hidden');
+        }
+
+        function closeEditStoryModal() {
+            document.getElementById('edit-story-modal').classList.add('hidden');
+            activeStoryIndexToEdit = null;
+        }
+
+        function saveEditStory() {
+            if (activeStoryIndexToEdit === null) return;
+            const newTitle = document.getElementById('edit-story-title').value;
+            const file = document.getElementById('edit-story-file').files[0];
+
+            customProfile.stories[activeStoryIndexToEdit].title = newTitle;
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    customProfile.stories[activeStoryIndexToEdit].img = event.target.result;
+                    saveCustomProfileData();
+                    renderCustomProfile();
+                    closeEditStoryModal();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                saveCustomProfileData();
+                renderCustomProfile();
+                closeEditStoryModal();
+            }
+        }
+
+        /* Custom Post Creation */
+        function addCustomPostModal() {
+            if (customProfile.posts.length >= 9) {
+                showToast('Límite de 9 publicaciones alcanzado.');
+                return;
+            }
+            document.getElementById('custom-post-file').value = '';
+            document.getElementById('custom-post-url').value = '';
+            document.getElementById('custom-post-caption').value = '';
+            document.getElementById('add-custom-post-modal').classList.remove('hidden');
+        }
+
+        function closeAddCustomPostModal() {
+            document.getElementById('add-custom-post-modal').classList.add('hidden');
+        }
+
+        function saveCustomPost() {
+            const file = document.getElementById('custom-post-file').files[0];
+            const url = document.getElementById('custom-post-url').value.trim();
+            const caption = document.getElementById('custom-post-caption').value.trim();
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    customProfile.posts.push({ img: event.target.result, caption: caption });
+                    saveCustomProfileData();
+                    renderCustomProfile();
+                    closeAddCustomPostModal();
+                };
+                reader.readAsDataURL(file);
+            } else if (url) {
+                customProfile.posts.push({ img: url, caption: caption });
+                saveCustomProfileData();
+                renderCustomProfile();
+                closeAddCustomPostModal();
+            } else {
+                showToast('Añade una foto o URL.');
+            }
+        }
+
+        function deleteCustomPost(index) {
+            customProfile.posts.splice(index, 1);
+            saveCustomProfileData();
+            renderCustomProfile();
+            showToast('Publicación eliminada.');
+        }
+
+        function printCustomProfile() {
+            window.print();
+        }
+
+        /* Utilities */
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function setupTheme() {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const icon = document.getElementById('theme-icon');
+
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+                icon.className = 'ph-bold ph-sun text-lg';
+            }
+
+            toggleBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                if (document.documentElement.classList.contains('dark')) {
+                    icon.className = 'ph-bold ph-sun text-lg';
+                } else {
+                    icon.className = 'ph-bold ph-moon text-lg';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+```[cite: 1]
